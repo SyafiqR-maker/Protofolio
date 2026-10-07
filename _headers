@@ -1,0 +1,23 @@
+# Security Headers untuk Netlify / Vercel / Cloudflare Pages
+# Taruh file ini di root project (selevel index.html)
+
+/*
+  # Mencegah clickjacking (sitmu di-iframe orang)
+  X-Frame-Options: DENY
+
+  # Mencegah browser menebak MIME type (mis. .js disajikan sebagai text/html)
+  X-Content-Type-Options: nosniff
+
+  # Batasi referrer yg dikirim ke situs lain
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Izin fitur browser (kamera, mic, geolocation, dll) — semua ditutup
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=()
+
+  # HSTS: paksa HTTPS 1 tahun + subdomain + preload list browser
+  # AKTIFKAN HANYA SETELAH YAKIN HTTPS SUDAH STABIL
+  # Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # CSP Dasar — izinkan hanya resource dari domain sendiri + inline style/script yg sudah ada
+  # Jika nanti pakai CDN/Google Fonts/Analytics, tambahkan domainnya di sini
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
